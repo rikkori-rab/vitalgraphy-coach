@@ -30,6 +30,14 @@ class Cafe24API {
    */
   async getProduct(productId) {
     try {
+      // API 토큰이 없으면 로컬 데이터 반환
+      if (!this.config.accessToken || this.config.accessToken === '') {
+        if (CONFIG.settings.debugMode) {
+          console.warn('Cafe24 API not configured, using local product data');
+        }
+        return this.getLocalProduct(productId);
+      }
+
       // 캐시 확인
       if (this.cache.products && this.cache.products[productId]) {
         const cacheAge = Date.now() - this.cache.lastUpdate;
@@ -57,9 +65,31 @@ class Cafe24API {
 
       return { success: true, data: data.product };
     } catch (error) {
-      console.error('Cafe24 API - Get Product Error:', error);
-      return { success: false, error: error.message };
+      if (CONFIG.settings.debugMode) {
+        console.warn('Cafe24 API error, falling back to local data:', error);
+      }
+      return this.getLocalProduct(productId);
     }
+  }
+
+  /**
+   * 로컬 제품 데이터 반환 (API 연동 전)
+   */
+  getLocalProduct(productId) {
+    // CONFIG.products에서 productId로 검색
+    for (const [key, product] of Object.entries(CONFIG.products)) {
+      if (product.id === productId) {
+        return { 
+          success: true, 
+          data: {
+            ...product,
+            stock: 999, // 기본 재고
+            available: true
+          }
+        };
+      }
+    }
+    return { success: false, error: 'Product not found' };
   }
 
   /**

@@ -16,7 +16,7 @@ const CONFIG = {
 
   // 백엔드 API 설정 (데이터 저장용)
   backend: {
-    apiUrl: 'https://api.vitalgraphi.com',  // 실제 백엔드 API URL로 변경
+    apiUrl: '',  // 백엔드 API 연동 전까지 비활성화
     endpoints: {
       saveConsultation: '/api/consultations',
       getProducts: '/api/products',
@@ -174,7 +174,7 @@ const CONFIG = {
     sessionTimeout: 3600000,  // 1시간
     enableOfflineMode: true,
     enablePWA: true,
-    debugMode: false,  // 개발 모드
+    debugMode: true,  // 개발 모드 (배포 시 false로 변경)
   }
 };
 

@@ -294,12 +294,16 @@ class DataManager {
       fbq('track', eventName, eventData);
     }
 
-    // 서버 로깅
-    if (CONFIG.backend.apiUrl) {
+    // 서버 로깅 (백엔드 API가 설정된 경우에만)
+    if (CONFIG.backend.apiUrl && CONFIG.backend.apiUrl !== '') {
       Utils.fetchAPI(CONFIG.backend.apiUrl + '/api/events', {
         method: 'POST',
         body: JSON.stringify(event),
-      }).catch(e => console.error('Failed to log event:', e));
+      }).catch(e => {
+        if (CONFIG.settings.debugMode) {
+          console.warn('Backend API not configured:', e);
+        }
+      });
     }
   }
 
