@@ -26,6 +26,22 @@ class WellnessCoach {
     this.setupEventListeners();
     this.checkExistingSession();
     this.initializeServiceWorker();
+    this.fixMobileViewport();
+  }
+
+  /**
+   * 모바일 뷰포트 높이 수정
+   */
+  fixMobileViewport() {
+    // 모바일 브라우저 주소창 문제 해결
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
   }
 
   /**
