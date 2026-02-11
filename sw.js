@@ -6,15 +6,15 @@
 
 const CACHE_NAME = 'vitalgraphi-coach-v1.0.0';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/styles.css',
-  '/js/config.js',
-  '/js/utils.js',
-  '/js/data-manager.js',
-  '/js/cafe24-api.js',
-  '/js/recommendation-engine.js',
-  '/js/app.js',
+  './',
+  './index.html',
+  './css/styles.css',
+  './js/config.js',
+  './js/utils.js',
+  './js/data-manager.js',
+  './js/cafe24-api.js',
+  './js/recommendation-engine.js',
+  './js/app.js',
   'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css',
 ];
 
@@ -81,7 +81,7 @@ self.addEventListener('fetch', (event) => {
       })
       .catch(() => {
         // 네트워크 오류 시 오프라인 페이지 반환 (옵션)
-        return caches.match('/index.html');
+        return caches.match('./index.html');
       })
   );
 });
