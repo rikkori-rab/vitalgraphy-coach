@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>모바일 최적화 테스트</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <style>
+    body { padding: 20px; background: #f5f5f5; }
+    .test-section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 12px; }
+    .test-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .test-result { padding: 10px; background: #f0f0f0; border-radius: 8px; margin-top: 8px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="test-section">
+    <div class="test-title">📱 모바일 최적화 테스트</div>
+    <div class="test-result">
+      <strong>화면 크기:</strong> <span id="screen-size"></span><br>
+      <strong>뷰포트:</strong> <span id="viewport"></span><br>
+      <strong>Safe Area Top:</strong> <span id="safe-top"></span><br>
+      <strong>Safe Area Bottom:</strong> <span id="safe-bottom"></span><br>
+      <strong>터치 지원:</strong> <span id="touch"></span>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <div class="test-title">✅ 체크박스 터치 테스트 (48px)</div>
+    <div class="consent-item" onclick="toggleCheckbox(this)">
+      <div class="consent-checkbox" id="test-checkbox"></div>
+      <div class="consent-text">
+        <div class="label">필수 동의 항목 <span class="badge-required">필수</span></div>
+        <div class="desc">체크박스를 터치해보세요</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <div class="test-title">🎯 버튼 터치 테스트 (최소 44px)</div>
+    <div class="choices-container" style="opacity: 1; padding-left: 0; max-width: 100%;">
+      <button class="choice-btn" onclick="alert('버튼 터치 성공!')">
+        <span class="icon">✨</span>
+        <span>버튼 터치 테스트</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="test-section">
+    <div class="test-title">🔘 큰 버튼 테스트 (58px)</div>
+    <button class="consent-submit-btn enabled" onclick="alert('큰 버튼 터치 성공!')">
+      동의하고 시작하기
+    </button>
+  </div>
+
+  <script>
+    // 화면 정보 표시
+    document.getElementById('screen-size').textContent = `${screen.width} × ${screen.height}`;
+    document.getElementById('viewport').textContent = `${window.innerWidth} × ${window.innerHeight}`;
+    
+    // Safe Area 계산
+    const computedStyle = getComputedStyle(document.documentElement);
+    const safeTop = computedStyle.getPropertyValue('--safe-area-top') || '0px';
+    const safeBottom = computedStyle.getPropertyValue('--safe-area-bottom') || '0px';
+    document.getElementById('safe-top').textContent = safeTop;
+    document.getElementById('safe-bottom').textContent = safeBottom;
+    
+    // 터치 지원 확인
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    document.getElementById('touch').textContent = hasTouch ? '✅ 지원됨' : '❌ 지원 안 됨';
+
+    // 체크박스 토글
+    function toggleCheckbox(item) {
+      const checkbox = item.querySelector('.consent-checkbox');
+      checkbox.classList.toggle('checked');
+    }
+  </script>
+</body>
+</html>
