@@ -76,6 +76,7 @@
 
   /* ─── Chat Area ─── */
   .chat-body {
+    overflow-x: hidden;
     flex: 1;
     overflow-y: auto;
     padding: 16px;
@@ -723,7 +724,7 @@
   .delay-14 { animation-delay: 4.2s; }
 
   /* ─── Screens ─── */
-  .screen { display: none; flex-direction: column; height: 100%; position: relative; }
+  .screen { display: none; flex-direction: column; height: 100%; width: 100%; position: relative; overflow-x: hidden; }
   .screen.active { display: flex; }
 
   /* ─── Input Bar ─── */
