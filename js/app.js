@@ -191,8 +191,12 @@ class WellnessCoach {
    */
   toggleConsent(id, isRequired) {
     const el = document.getElementById(id);
+    if (!el) return;
+    
+    // 필수 항목은 체크만 가능 (체크 해제 불가)
     if (isRequired && el.classList.contains('checked')) return;
-    el.classList.toggle('checked');
+    
+    el.classList.add('checked');
     this.updateConsentBtn();
   }
 
