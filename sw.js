@@ -4,7 +4,7 @@
  * ═══════════════════════════════════════════════════════
  */
 
-const CACHE_NAME = 'vitalgraphi-coach-v4.0.0';
+const CACHE_NAME = 'vitalgraphi-coach-v5.0.0';
 const urlsToCache = [
   './',
   './index.html',
